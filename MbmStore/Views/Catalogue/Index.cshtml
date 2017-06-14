@@ -26,13 +26,15 @@
                     Published: @book.Published<br />
                     ISBN: @book.ISBN<br />
                     Price: @String.Format("{0:0.00}", book.Price)
-                    &nbsp;
-                    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-                    {
-                        @Html.Hidden("ProductId", book.ProductId)
-                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                        <input type="submit" class="btn btn-success btn-sm" value="Add to cart" />
-                    }
+                    <div class="card-block text-center">
+                        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            @Html.Hidden("ProductId", book.ProductId)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            @Html.DropDownList("Quantity", null, "0", new { @class = "custom-select" })
+                            <input type="submit" class="btn btn-success" value="Add to cart" />
+                        }
+                    </div>
                 </div>
                 <div class="card-block text-center">
                     <a href="#" class="btn btn-primary">View book details</a>
@@ -54,13 +56,15 @@
                     Released: @musicCD.Released<br />
                     Album duration: @musicCD.GetPlayingTime()<br />
                     Price: @String.Format("{0:0.00}", musicCD.Price)
-                    &nbsp;
-                    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-                    {
-                        @Html.Hidden("ProductId", musicCD.ProductId)
-                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                        <input type="submit" class="btn btn-success btn-sm" value="Add to cart" />
-                    }
+                    <div class="card-block text-center">
+                        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            @Html.Hidden("ProductId", musicCD.ProductId)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            @Html.DropDownList("Quantity", null, "0", new { @class = "custom-select" })
+                            <input type="submit" class="btn btn-success" value="Add to cart" />
+                        }
+                    </div>
                 </div>
                 @{ int i = 1; }
                 @foreach (Track track in musicCD.Tracks)
@@ -94,13 +98,15 @@
                     <h4>@movie.Title</h4>
                     Author: @movie.Director<br />
                     Price: @String.Format("{0:0.00}", movie.Price)
-                    &nbsp;
-                    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-                    {
-                        @Html.Hidden("ProductId", movie.ProductId)
-                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                        <input type="submit" class="btn btn-success btn-sm" value="Add to cart" />
-                    }
+                    <div class="card-block text-center">
+                        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            @Html.Hidden("ProductId", movie.ProductId)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            @Html.DropDownList("Quantity", null, "0", new { @class = "custom-select" })
+                            <input type="submit" class="btn btn-success" value="Add to cart" />
+                        }
+                    </div>
                 </div>
                 <div class="card-block text-center">
                     <a href="#" class="btn btn-primary">View movie details</a>

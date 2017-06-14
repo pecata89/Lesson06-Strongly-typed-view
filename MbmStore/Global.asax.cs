@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MbmStore.Infrastructure.Binders;
+using MbmStore.ViewModels;
 
 namespace MbmStore
 {
@@ -13,6 +15,9 @@ namespace MbmStore
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            // Add custom model binder
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

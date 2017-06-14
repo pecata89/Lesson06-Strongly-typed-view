@@ -19,6 +19,15 @@ namespace MbmStore.Controllers
         {
             Repository repository = new Repository();
 
+            List<SelectListItem> Quantity = new List<SelectListItem>();
+
+            for (int i = 0; i <= 100; i++)
+            {
+                Quantity.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
+            }
+
+            ViewBag.Quantity = Quantity;
+            
             return View(repository.Products);
         }
     }
