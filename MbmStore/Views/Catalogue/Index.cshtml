@@ -1,4 +1,5 @@
 ﻿@using MbmStore.Models
+@model IEnumerable<Product>
 
 @{
     ViewBag.Title = "Catalogue";
@@ -8,92 +9,77 @@
 <div class="row">
     <div class="col">
         <p>BOOKS</p>
-        @foreach (Product product in ViewBag.Products)
+        @foreach (Book book in Model.OfType<Book>().ToList())
         {
-            if (product is Book)
-            {
-                Book book = (Book)product;
-
-                <div class="card card-info text-left">
-                    <img class="card-img-top" src="~/Content/Images/@book.ImageUrl" style="width: 100%;" />
-                    <div class="card-block">
-                        <h4>@book.Title</h4>
-                        Author: @book.Author<br />
-                        Published: @book.Publisher<br />
-                        Published: @book.Published<br />
-                        ISBN: @book.ISBN<br />
-                        Price: @String.Format("{0:0.00}", book.Price)
-                    </div>
-                    <div class="card-block text-center">
-                        <a href="#" class="btn btn-primary">View book details</a>
-                    </div>
+            <div class="card card-info text-left">
+                <img class="card-img-top" src="~/Content/Images/@book.ImageUrl" style="width: 100%;" />
+                <div class="card-block">
+                    <h4>@book.Title</h4>
+                    Author: @book.Author<br />
+                    Published: @book.Publisher<br />
+                    Published: @book.Published<br />
+                    ISBN: @book.ISBN<br />
+                    Price: @String.Format("{0:0.00}", book.Price)
                 </div>
-                <br />
-            }
+                <div class="card-block text-center">
+                    <a href="#" class="btn btn-primary">View book details</a>
+                </div>
+            </div>
+            <br />
         }
     </div>
 
     <div class="col">
         <p>MUSIC CDS</p>
-        @foreach (Product product in ViewBag.Products)
+        @foreach (MusicCD musicCD in Model.OfType<MusicCD>().ToList())
         {
-            if (product is MusicCD)
-            {
-                MusicCD musicCD = (MusicCD)product;
-
-                <div class="card card-info text-left">
-                    <img class="card-img-top" src="~/Content/Images/@musicCD.ImageUrl" style="width: 100%;" />
-                    <div class="card-block">
-                        <h4>@musicCD.Title</h4>
-                        Artist: @musicCD.Artist<br />
-                        Released: @musicCD.Released<br />
-                        Album duration: @musicCD.GetPlayingTime()<br />
-                        Price: @String.Format("{0:0.00}", musicCD.Price)
-                    </div>
-                    @{ int i = 1; }
-                    @foreach (Track track in musicCD.Tracks)
-                    {
-                        <button type="button" class="list-group-item list-group-item-action justify-content-between">
-                            <div>
-                                @i<span>.&nbsp;</span> @track.Title
-                            </div>
-                            <span class="badge badge-default badge-pill">
-                                @track.Length.ToString(@"mm\:ss")
-                            </span>
-                        </button>
-
-                        i++;
-                    }
-                    <div class="card-block text-center">
-                        <a href="#" class="btn btn-primary">View cd details</a>
-                    </div>
+            <div class="card card-info text-left">
+                <img class="card-img-top" src="~/Content/Images/@musicCD.ImageUrl" style="width: 100%;" />
+                <div class="card-block">
+                    <h4>@musicCD.Title</h4>
+                    Artist: @musicCD.Artist<br />
+                    Released: @musicCD.Released<br />
+                    Album duration: @musicCD.GetPlayingTime()<br />
+                    Price: @String.Format("{0:0.00}", musicCD.Price)
                 </div>
-                <br />
-            }
+                @{ int i = 1; }
+                @foreach (Track track in musicCD.Tracks)
+                {
+                    <button type="button" class="list-group-item list-group-item-action justify-content-between">
+                        <div>
+                            @i<span>.&nbsp;</span> @track.Title
+                        </div>
+                        <span class="badge badge-default badge-pill">
+                            @track.Length.ToString(@"mm\:ss")
+                        </span>
+                    </button>
+
+                    i++;
+                }
+                <div class="card-block text-center">
+                    <a href="#" class="btn btn-primary">View cd details</a>
+                </div>
+            </div>
+            <br />
         }
     </div>
 
     <div class="col">
         <p>MOVIES</p>
-        @foreach (Product product in ViewBag.Products)
+        @foreach (Movie movie in Model.OfType<Movie>().ToList())
         {
-            if (product is Movie)
-            {
-                Movie movie = (Movie)product;
-
-                <div class="card card-info text-left">
-                    <img class="card-img-top" src="~/Content/Images/@movie.ImageUrl" style="width: 100%;" />
-                    <div class="card-block">
-                        <h4>@movie.Title</h4>
-                        Author: @movie.Director<br />
-                        Price: @String.Format("{0:0.00}", movie.Price)
-                    </div>
-                    <div class="card-block text-center">
-                        <a href="#" class="btn btn-primary">View movie details</a>
-                    </div>
+            <div class="card card-info text-left">
+                <img class="card-img-top" src="~/Content/Images/@movie.ImageUrl" style="width: 100%;" />
+                <div class="card-block">
+                    <h4>@movie.Title</h4>
+                    Author: @movie.Director<br />
+                    Price: @String.Format("{0:0.00}", movie.Price)
                 </div>
-                <br />
-            }
+                <div class="card-block text-center">
+                    <a href="#" class="btn btn-primary">View movie details</a>
+                </div>
+            </div>
+            <br />
         }
     </div>
 </div>

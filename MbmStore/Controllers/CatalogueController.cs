@@ -12,14 +12,14 @@ namespace MbmStore.Controllers
     {
 
         // object
-        private Repository repository = new Repository();
+        // private Repository repository = new Repository();
 
         // GET: Catalogue
         public ActionResult Index()
         {
-            ViewBag.Products = repository.Products;
+            Repository repository = new Repository();
 
-            return View();
+            return View(repository.Products);
         }
     }
 }
