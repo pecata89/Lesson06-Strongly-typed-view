@@ -17,8 +17,9 @@ namespace MbmStore.Models
 
         }
 
-        public Product(string title, decimal price, string imageUrl)
+        public Product(int productId, string title, decimal price, string imageUrl)
         {
+            ProductId = productId;
             Title = title;
             Price = price;
             ImageUrl = imageUrl;

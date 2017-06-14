@@ -18,10 +18,10 @@ namespace MbmStore.Infrastructure
             MusicCD musicCD = new MusicCD();
 
             // creating an object of each type sub classes
-            Book b1 = new Book("Emotions Revealed", 10.07m, "emotions.jpg", "Paul Ekman", "Holt Paperbacks", 2007, "978-0805083392");
-            Book b2 = new Book("Telling Lies", 9.27m, "lies.jpg", "Paul Ekman", "W. W. Norton & Company", 2009, "978-0393337457");
+            Book b1 = new Book(1001, "Emotions Revealed", 10.07m, "emotions.jpg", "Paul Ekman", "Holt Paperbacks", 2007, "978-0805083392");
+            Book b2 = new Book(1002, "Telling Lies", 9.27m, "lies.jpg", "Paul Ekman", "W. W. Norton & Company", 2009, "978-0393337457");
 
-            MusicCD cd1 = new MusicCD("I Am Not a Human Being", 35.99m, "nhb1.jpg", "Lil Wayne", "Young Money, Cash Money, Universal Motown", 2010);
+            MusicCD cd1 = new MusicCD(2001, "I Am Not a Human Being", 35.99m, "nhb1.jpg", "Lil Wayne", "Young Money, Cash Money, Universal Motown", 2010);
 
             cd1.AddTrack(new Track("Gonorrhea", new TimeSpan(0, 4, 22)));
             cd1.AddTrack(new Track("Hold Up", new TimeSpan(0, 4, 11)));
@@ -37,7 +37,7 @@ namespace MbmStore.Infrastructure
             cd1.AddTrack(new Track("YM Salute", new TimeSpan(0, 5, 14)));
             cd1.AddTrack(new Track("I Don't Like the Look of It", new TimeSpan(0, 3, 18)));
 
-            MusicCD cd2 = new MusicCD("I Am Not a Human Being 2", 11.84m, "nhb2.jpg", "Lil Wayne", "Young Money, Cash Money, Republic", 2013);
+            MusicCD cd2 = new MusicCD(2002, "I Am Not a Human Being 2", 11.84m, "nhb2.jpg", "Lil Wayne", "Young Money, Cash Money, Republic", 2013);
 
             cd2.AddTrack(new Track("IANAHB", new TimeSpan(0, 5, 38)));
             cd2.AddTrack(new Track("Curtains", new TimeSpan(0, 4, 31)));
@@ -56,12 +56,12 @@ namespace MbmStore.Infrastructure
             cd2.AddTrack(new Track("Hello", new TimeSpan(0, 4, 02)));
 
             // create a new Movie object with instance name jungleBook
-            Movie m1 = new Movie("Jungle Book", 160.50m, "junglebook.jpg", "Jon Favreau");
+            Movie m1 = new Movie(3001, "Jungle Book", 160.50m, "junglebook.jpg", "Jon Favreau");
 
             // Create two new instances of Movie object
             // Calling the constructor with an extra argument
-            Movie m2 = new Movie("Midnight in Paris", 150.75m, "midnight.jpg", "Woody Allen");
-            Movie m3 = new Movie("The Hangover", 180.99m, "hangover.jpg", "Todd Phillips");
+            Movie m2 = new Movie(3002, "Midnight in Paris", 150.75m, "midnight.jpg", "Woody Allen");
+            Movie m3 = new Movie(3003, "The Hangover", 180.99m, "hangover.jpg", "Todd Phillips");
 
             Products.Add(b1);
             Products.Add(b2);

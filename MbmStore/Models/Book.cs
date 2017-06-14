@@ -17,7 +17,7 @@ namespace MbmStore.Models
 
         }
 
-        public Book(string title, decimal price, string imageUrl, string author, string publisher, short published, string isbn) : base (title, price, imageUrl)
+        public Book(int productId, string title, decimal price, string imageUrl, string author, string publisher, short published, string isbn) : base (productId, title, price, imageUrl)
         {
             Author = author;
             Publisher = publisher;

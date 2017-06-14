@@ -40,7 +40,7 @@ namespace MbmStore.Models
             Price = price;
         }
 
-        public Movie(string title, decimal price, string imageUrl, string director) : base (title, price, imageUrl)
+        public Movie(int productId, string title, decimal price, string imageUrl, string director) : base (productId, title, price, imageUrl)
         {
             this.director = director;
         }
