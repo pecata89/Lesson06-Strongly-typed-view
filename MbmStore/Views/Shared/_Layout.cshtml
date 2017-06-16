@@ -13,6 +13,36 @@
 </head>
 <body>
     <div class="container">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                @Html.ActionLink("Music Book Movie Store", "Index", "Home", null, new { @class = "navbar-brand" })
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <ul class="navbar-nav">
+                        <!-- Use your Controller to determine where you are -->
+                        @{
+                            string controller = ViewContext.RouteData.Values["controller"].ToString();
+                        }
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" + (controller == "Home" ? " active" : "") })
+                        </li>
+                        <li class="nav-item dropdown">
+                            @Html.ActionLink("Catalogue", "Index", "Catalogue", null, new { @class = "nav-link dropdown-toggle" + (controller == "Catalogue" ? " active" : ""), id = "navbarDropdownMenuLink", data_toggle = "dropdown", aria_haspopup = "true", aria_expanded = "false" })
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @Html.ActionLink("View all", "Index", "Catalogue", null, new { @class = "dropdown-item"})
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Invoices", "Index", "Invoice", null, new { @class = "nav-link" + (controller == "Invoice" ? " active" : "") })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br />
+        <br />
         @RenderBody()
     </div>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
