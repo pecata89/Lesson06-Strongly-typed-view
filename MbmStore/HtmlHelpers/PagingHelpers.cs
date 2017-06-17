@@ -14,21 +14,62 @@ namespace MbmStore.HtmlHelpers
         {
             StringBuilder result = new StringBuilder();
 
+            TagBuilder ul = new TagBuilder("ul");
+            ul.AddCssClass("pagination justify-content-center");
+
             for (int i = 1; i <= pagingInfo.TotalPages; i++)
             {
-                TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl(i));
-                tag.InnerHtml = i.ToString();
+                TagBuilder li = new TagBuilder("li");
+                TagBuilder anchor = new TagBuilder("a");
+                anchor.MergeAttribute("href", pageUrl(i));
+                anchor.InnerHtml = i.ToString();
+                TagBuilder span = new TagBuilder("span");
+                span.AddCssClass("page-link");
 
+                TagBuilder previous = new TagBuilder("li");
+                TagBuilder next = new TagBuilder("li");
+
+
+                // when pagination link is active
                 if (i == pagingInfo.CurrentPage)
                 {
-                    tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-primary");
+                    li.AddCssClass("page-item active");
+                    span.AddCssClass("page-link");
+                    span.InnerHtml = i.ToString();
+                    li.InnerHtml = span.ToString();
+                }
+                // when you can select this page for showing different products
+                else
+                {
+                    li.AddCssClass("page-item");
+                    anchor.AddCssClass("page-link");
+                    li.InnerHtml += anchor.ToString();
                 }
 
-                tag.AddCssClass("btn btn-default");
-                result.Append(tag.ToString());
+
+                if (i == 1 && pagingInfo.CurrentPage == 1)
+                {
+                    ul.InnerHtml += "<li class=\"page-item disabled\"><span class=\"page-link\">Previous</span></li>";
+                }
+                else if (i == 1 && pagingInfo.CurrentPage > 1)
+                {
+                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + ((pagingInfo.CurrentPage) - 1) + "\">Previous</a></li>";
+                }
+                
+                ul.InnerHtml += li.ToString();
+
+                if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage == pagingInfo.TotalPages)
+                {
+                    ul.InnerHtml += "<li class=\"page-item disabled\"><span class=\"page-link\">Next</span></li>";
+                }
+                else if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage < pagingInfo.TotalPages)
+                {
+                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + ((pagingInfo.CurrentPage) + 1) + "\">Next</a></li>";
+                }
+
             }
+
+            result.Append(ul.ToString());
 
             return MvcHtmlString.Create(result.ToString());
         }
