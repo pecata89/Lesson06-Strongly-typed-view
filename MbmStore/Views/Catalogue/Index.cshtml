@@ -1,5 +1,5 @@
 ﻿@using MbmStore.Models
-@model IEnumerable<Product>
+@model MbmStore.ViewModels.ProductsListViewModel
 
 @{
     ViewBag.Title = "Catalogue";
@@ -12,19 +12,29 @@
     <input type="submit" class="btn btn-success" value="View Cart" />
 }
 <br />
-<div class="row">
-    <div class="col">
-        <p>BOOKS</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Information</th>
+            <th class="text-center">Order</th>
+            <th class="text-center">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+
         @Html.Partial("ProductSummaryBook", null)
-    </div>
 
-    <div class="col">
-        <p>MUSIC CDS</p>
         @Html.Partial("ProductSummaryMusicCD", null)
-    </div>
 
-    <div class="col">
-        <p>MOVIES</p>
         @Html.Partial("ProductSummaryMovie", null)
-    </div>
-</div>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-center">
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+            </td>
+        </tr>
+    </tfoot>
+</table>
