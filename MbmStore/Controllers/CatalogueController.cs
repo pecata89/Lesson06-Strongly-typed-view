@@ -17,14 +17,15 @@ namespace MbmStore.Controllers
         // private Repository repository = new Repository();
 
         // GET: Catalogue
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string category, int page = 1)
         {
             Repository repository = new Repository();
 
             ProductsListViewModel model = new ProductsListViewModel
             {
                 Products = repository.Products
-                    .OrderBy(p => p.Title)
+                    .Where(p => category == null || p.Category == category)
+                    .OrderBy(p => p.ProductId)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),
 
@@ -32,13 +33,14 @@ namespace MbmStore.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Products.Count()
-                }
+                    TotalItems = repository.Products.Where(p => category == null || p.Category == category).Count()
+                },
+                CurrentCategory = category
             };
 
             List<SelectListItem> Quantity = new List<SelectListItem>();
 
-            for (int i = 0; i <= 100; i++)
+            for (int i = 1; i <= 100; i++)
             {
                 Quantity.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
             }

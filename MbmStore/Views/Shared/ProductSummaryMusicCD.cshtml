@@ -21,7 +21,7 @@
                 {
                     @Html.Hidden("ProductId", musicCD.ProductId)
                     @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                    @Html.DropDownList("Quantity", null, "0", new { @class = "custom-select" })<br /><br />
+                    @Html.DropDownList("Quantity", null, null, new { @class = "custom-select" })<br /><br />
                     <input type="submit" class="btn btn-success" value="Add to cart" />
                 }
             </td>

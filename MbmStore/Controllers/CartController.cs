@@ -61,5 +61,10 @@ namespace MbmStore.Controllers
             }
             return cart;
         }
+
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
     }
 }

@@ -30,7 +30,7 @@
                         <li class="nav-item dropdown">
                             @Html.ActionLink("Catalogue", "Index", "Catalogue", null, new { @class = "nav-link dropdown-toggle" + (controller == "Catalogue" ? " active" : ""), id = "navbarDropdownMenuLink", data_toggle = "dropdown", aria_haspopup = "true", aria_expanded = "false" })
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                @Html.ActionLink("View all", "Index", "Catalogue", null, new { @class = "dropdown-item"})
+                                @Html.Action("NavBar", "Nav")
                             </div>
                         </li>
                         <li class="nav-item">
@@ -39,6 +39,7 @@
                     </ul>
                 </div>
             </div>
+            @Html.Action("Summary", "Cart")
         </nav>
         <br />
         <br />
