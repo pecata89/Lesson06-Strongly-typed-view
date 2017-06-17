@@ -11,7 +11,7 @@ namespace MbmStore.Controllers
 {
     public class CatalogueController : Controller
     {
-        public int PageSize = 3;
+        public int PageSize = 2;
 
         // object
         // private Repository repository = new Repository();
@@ -24,7 +24,7 @@ namespace MbmStore.Controllers
             ProductsListViewModel model = new ProductsListViewModel
             {
                 Products = repository.Products
-                    .OrderBy(p => p.ProductId)
+                    .OrderBy(p => p.Title)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),
 

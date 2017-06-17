@@ -26,10 +26,6 @@ namespace MbmStore.HtmlHelpers
                 TagBuilder span = new TagBuilder("span");
                 span.AddCssClass("page-link");
 
-                TagBuilder previous = new TagBuilder("li");
-                TagBuilder next = new TagBuilder("li");
-
-
                 // when pagination link is active
                 if (i == pagingInfo.CurrentPage)
                 {
@@ -53,7 +49,7 @@ namespace MbmStore.HtmlHelpers
                 }
                 else if (i == 1 && pagingInfo.CurrentPage > 1)
                 {
-                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + ((pagingInfo.CurrentPage) - 1) + "\">Previous</a></li>";
+                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + pageUrl((pagingInfo.CurrentPage) - 1) + "\">Previous</a></li>";
                 }
                 
                 ul.InnerHtml += li.ToString();
@@ -64,7 +60,7 @@ namespace MbmStore.HtmlHelpers
                 }
                 else if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage < pagingInfo.TotalPages)
                 {
-                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + ((pagingInfo.CurrentPage) + 1) + "\">Next</a></li>";
+                    ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + pageUrl((pagingInfo.CurrentPage) + 1) + "\">Next</a></li>";
                 }
 
             }
