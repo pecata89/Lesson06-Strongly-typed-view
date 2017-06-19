@@ -2,14 +2,17 @@
 
 @foreach (var link in Model)
 {
-    @Html.RouteLink(link + "s", new
-        {
-            controller = "Catalogue",
-            action = "Index",
-            category = link,
-            page = 1
-        }, new { @class = "dropdown-item" + (link != ViewBag.SelectedCategory ? "" : " disabled") }
-    )
+    if (link != null)
+    {
+        @Html.RouteLink(link + 's', new
+            {
+                controller = "Catalogue",
+                action = "Index",
+                category = link,
+                page = 1
+            }, new { @class = "dropdown-item" + (link != ViewBag.SelectedCategory ? "" : " disabled") }
+        )
+    }
 }
 
 @Html.ActionLink("View all", "Index", "Catalogue", null, new { @class = "dropdown-item" + (ViewBag.SelectedCategory != null ? "" : " disabled") })

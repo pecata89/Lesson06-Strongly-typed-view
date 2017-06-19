@@ -1,5 +1,5 @@
 ﻿@using MbmStore.Models
-
+@model MbmStore.ViewModels.InvoicesListViewModel
 
 @{
     ViewBag.Title = "Invoices";
@@ -13,39 +13,63 @@
     <button type="submit" class="btn btn-outline-success">Show invoices</button>
 }
 <br /><br />
-<div class="col-10 align-self-center">
-    @foreach (Invoice invoice in ViewBag.Invoices)
-    {
-        <strong>@invoice.Customer.firstName @invoice.Customer.lastName</strong><br /><br />
-        <div class="row">
-            <div class="col-lg-9">
-                <em>Products</em>
-            </div>
-            <div class="col-lg-3">
-                <em>Price</em>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            @foreach (OrderItem item in invoice.OrderItems)
-            {
-                <div class="col-lg-9">
-                    @item.Product.Title
+@if (Model.Invoices.OfType<Invoice>().Count() > 0)
+{
+    <div class="col-10 align-self-center">
+        @foreach (Invoice invoice in Model.Invoices)
+        {
+            <strong>@invoice.Customer.FirstName @invoice.Customer.LastName</strong><br /><br />
+            <div class="row">
+                <div class="col-lg-1">
+                    <em>Order #</em>
                 </div>
-                <div class="col-lg-3">
-                    @item.Product.Price
+                <div class="col-lg-8">
+                    <em>Products</em>
                 </div>
-            }
-        </div>
-        <div class="row">
-            <div class="col-lg-9 text-right">
-                Total Price:
+                <div class="col-lg-1">
+                    <em>Product #</em>
+                </div>
+                <div class="col-lg-1">
+                    <em>Quantity</em>
+                </div>
+                <div class="col-lg-1">
+                    <em>Price</em>
+                </div>
             </div>
-            <div class="col-lg-3">
-                @String.Format("{0:0.00}", invoice.TotalPrice)
+            <br />
+            <div class="row">
+                @foreach (OrderItem order in Model.OrderItems
+                    .Where(order => order.InvoiceId == invoice.InvoiceId)
+                )
+                {
+                    <div class="col-lg-1">
+                        @order.OrderItemId
+                    </div>
+                    <div class="col-lg-8">
+                        @order.Product.Title
+                    </div>
+                    <div class="col-lg-1">
+                        @order.Product.ProductId
+                    </div>
+                    <div class="col-lg-1">
+                        @order.Quantity
+                    </div>
+                    <div class="col-lg-1">
+                        @String.Format("{0:0.00}", order.TotalPrice)
+                    </div>
+                }
             </div>
-        </div>
-        <br />
-        <br />
-    }
-</div>
+            <br />
+            <div class="row">
+                <div class="col-lg-11 text-right">
+                    Total Price:
+                </div>
+                <div class="col-lg-1">
+                    @String.Format("{0:0.00}", invoice.TotalPrice)
+                </div>
+            </div>
+            <br />
+            <br />
+        }
+    </div>
+}

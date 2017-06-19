@@ -11,5 +11,6 @@ namespace MbmStore.ViewModels
         public IEnumerable<Product> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
+        public IEnumerable<MusicCD> MusicCDs { get; set; }
     }
 }

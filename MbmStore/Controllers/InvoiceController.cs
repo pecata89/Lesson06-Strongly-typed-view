@@ -1,50 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MbmStore.Models;
+using MbmStore.DAL;
+using MbmStore.ViewModels;
 using MbmStore.Infrastructure;
 
 namespace MbmStore.Controllers
 {
     public class InvoiceController : Controller
     {
-        // instantiating repository class
-        // don't forget to declare the object private 
-        private Repository repository = new Repository();
+        private MbmStoreContext db;
 
         private List<SelectListItem> customers = new List<SelectListItem>();
+
+        public InvoiceController()
+        {
+            db = new MbmStoreContext();
+        }
 
         // GET: Invoice
         public ActionResult Index()
         {
-            Utilities.SortCustomers(customers);
+            InvoicesListViewModel model = new InvoicesListViewModel()
+            {
+                Invoices = db.Invoices.Include(i => i.Customer).ToList(),
+                OrderItems = db.OrderItems.Include(i => i.Product).ToList()
+            };
 
+            Utilities.SortCustomers(customers);
             ViewBag.CustomerId = customers;
 
-            ViewBag.Invoices = repository.Invoices;
-
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Index(int? CustomerId)
         {
+            InvoicesListViewModel model;
+
             if (CustomerId != null)
             {
-                // select invoices for a customer with linq
-                ViewBag.Invoices = repository.Invoices.Where(r => r.Customer.CustomerId == CustomerId);
+                model = new InvoicesListViewModel()
+                {
+                    Invoices = db.Invoices
+                        .Include(i => i.Customer)
+                        .Where(c => c.Customer.CustomerId == CustomerId)
+                        .ToList(),
+                    OrderItems = db.OrderItems.Include(i => i.Product).ToList()
+                };
             }
             else
             {
-                ViewBag.Invoices = repository.Invoices;
+                model = new InvoicesListViewModel()
+                {
+                    Invoices = db.Invoices
+                        .Include(i => i.Customer)
+                        .ToList(),
+                    OrderItems = db.OrderItems.Include(i => i.Product).ToList()
+                };
             }
 
             Utilities.SortCustomers(customers);
             ViewBag.CustomerId = customers;
 
-            return View();
+            return View(model);
         }
     }
 }

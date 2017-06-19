@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MbmStore.Models
 {
+    [Table("Book")]
     public class Book : Product
     {
         public string Author { get; set; }
@@ -17,12 +19,10 @@ namespace MbmStore.Models
 
         }
 
-        public Book(int productId, string title, decimal price, string imageUrl, string author, string publisher, short published, string isbn) : base (productId, title, price, imageUrl)
+        public Book(string author, string title, decimal price, short published) : base(title, price)
         {
             Author = author;
-            Publisher = publisher;
             Published = published;
-            ISBN = isbn;
         }
     }
 }

@@ -4,15 +4,18 @@
 <h1 class="text-center">Categories</h1>
 <br />
 @foreach (var link in Model)
+{
+    if (link != null)
     {
         @Html.RouteLink(link + "s", new
-        {
-            controller = "Catalogue",
-            action = "Index",
-            category = link,
-            page = 1
-        }, new { @class = "btn btn-block btn-primary btn-lg" + (link != ViewBag.SelectedCategory ? "" : " disabled")  }
-    )
+            {
+                controller = "Catalogue",
+                action = "Index",
+                category = link,
+                page = 1
+            }, new { @class = "btn btn-block btn-primary btn-lg" + (link != ViewBag.SelectedCategory ? "" : " disabled")  }
+        )
+    }
     <br />
 }
 @Html.ActionLink("View all", "Index", "Catalogue", null, new { @class = "btn btn-block btn-outline-primary btn-lg" + (ViewBag.SelectedCategory != null ? "" : " disabled") })

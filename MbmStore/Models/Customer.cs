@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,73 +8,57 @@ namespace MbmStore.Models
 {
     public class Customer
     {
-        // auto-implemented properties
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string address { get; set; }
-        public string zip { get; set; }
-        public string city { get; set; }
         public int CustomerId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string Zip { get; set; }
+        public string City { get; set; }
+        public string Email { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime Birthdate { get; set; }
 
 
-        // List collection of type string
-        private List<string> phoneNumbers { get; set; } = new List<string>();
-        private DateTime birthDate;
 
-        private DateTime now = DateTime.Now;
-        private int age;
-
-        public DateTime BirthDate
-        {
-            get
-            {
-                if (Age < 0 || Age > 120)
-                {
-                    throw new Exception("Age not accepted");
-                }
-                else
-                {
-                    return birthDate;
-                }
-            }
-            set { birthDate = value; }
-        }
-
+        // read only property
         public int Age
         {
             get
             {
-                if (now.Month < birthDate.Month || (now.Month == birthDate.Month && now.Day < birthDate.Day))
+                DateTime now = DateTime.Now;
+                int age = 0;
+                age = now.Year - Birthdate.Year;
+                if (now.Month < Birthdate.Month ||
+                    (now.Month == Birthdate.Month && now.Day < Birthdate.Day))
                 {
                     age--;
                 }
-
                 return age;
             }
         }
 
-        // Property
-        public List<string> PhoneNumbers
-        {
-            get { return phoneNumbers; }
-        }
+        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Phone> PhoneNumbers { get; set; }
+        
 
-        // Method that takes no parameters and returns no value - void
-        public void AddPhone(string phone)
-        {
-            phoneNumbers.Add(phone);    
-        }
+        // cunstructors
+        public Customer() { }
 
-        // Constructors
-        public Customer(int customerId, string firstName, string lastName, string address, string zip, string city, DateTime birthDate)
+        public Customer(int customerId, string firstName, string lastName, string address, string zip, string city)
         {
             CustomerId = customerId;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.zip = zip;
-            this.city = city;
-            this.birthDate = birthDate;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            Zip = zip;
+            City = city;
         }
+
+        // method
+        public void AddPhone(Phone phone)
+        {
+            PhoneNumbers.Add(phone);
+        }
+
     }
 }

@@ -29,11 +29,30 @@
             </thead>
             <tbody>
 
-                @Html.Partial("ProductSummaryBook", null)
+            @if (Model.Products.OfType<Book>().Count() > 0)
+            {
+                foreach (Book book in Model.Products.OfType<Book>().ToList())
+                {
+                    @Html.Partial("ProductSummaryBook", book);
+                }
+            }
 
-                @Html.Partial("ProductSummaryMusicCD", null)
 
-                @Html.Partial("ProductSummaryMovie", null)
+            @if (Model.Products.OfType<MusicCD>().Count() > 0)
+            {
+                foreach (MusicCD musicCD in Model.Products.OfType<MusicCD>().ToList())
+                {
+                    @Html.Partial("ProductSummaryMusicCd", musicCD);
+                }
+            }
+
+            @if (Model.Products.OfType<Movie>().Count() > 0)
+            {
+                foreach (Movie movie in Model.Products.OfType<Movie>().ToList())
+                {
+                    @Html.Partial("ProductSummaryMovie", movie);
+                }
+            }
 
             </tbody>
             <tfoot>

@@ -43,22 +43,22 @@ namespace MbmStore.HtmlHelpers
                 }
 
 
-                if (i == 1 && pagingInfo.CurrentPage == 1)
+                if (i == 1 && pagingInfo.CurrentPage == 1 && pagingInfo.TotalPages > 1)
                 {
                     ul.InnerHtml += "<li class=\"page-item disabled\"><span class=\"page-link\">Previous</span></li>";
                 }
-                else if (i == 1 && pagingInfo.CurrentPage > 1)
+                else if (i == 1 && pagingInfo.CurrentPage > 1 && pagingInfo.TotalPages > 1)
                 {
                     ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + pageUrl((pagingInfo.CurrentPage) - 1) + "\">Previous</a></li>";
                 }
                 
                 ul.InnerHtml += li.ToString();
 
-                if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage == pagingInfo.TotalPages)
+                if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage == pagingInfo.TotalPages && pagingInfo.TotalPages > 1)
                 {
                     ul.InnerHtml += "<li class=\"page-item disabled\"><span class=\"page-link\">Next</span></li>";
                 }
-                else if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage < pagingInfo.TotalPages)
+                else if (i == pagingInfo.TotalPages && pagingInfo.CurrentPage < pagingInfo.TotalPages && pagingInfo.TotalPages > 1)
                 {
                     ul.InnerHtml += "<li class=\"page-item\"><a class=\"page-link\" href=\"" + pageUrl((pagingInfo.CurrentPage) + 1) + "\">Next</a></li>";
                 }

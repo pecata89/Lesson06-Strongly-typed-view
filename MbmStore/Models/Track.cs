@@ -7,20 +7,23 @@ namespace MbmStore.Models
 {
     public class Track
     {
+        public int TrackId { get; set; }
         public string Title { get; set; }
         public string Composer { get; set; }
         public TimeSpan Length { get; set; }
-        
+
+        public ICollection<MusicCD> MusicCD { get; set; }
 
         public Track()
         {
 
         }
 
-        public Track(string title, TimeSpan length)
+        public Track(string title, TimeSpan length, string composer)
         {
             Title = title;
             Length = length;
+            Composer = composer;
         }
     }
 }

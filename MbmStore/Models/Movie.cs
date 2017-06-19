@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MbmStore.Models
 {
+    [Table("Movie")]
     public class Movie : Product
     {
         // fields
@@ -34,15 +36,14 @@ namespace MbmStore.Models
 
 
         // constructors
-        public Movie(string title, decimal price)
+        public Movie()
         {
-            Title = title;
-            Price = price;
+
         }
 
-        public Movie(int productId, string title, decimal price, string imageUrl, string director) : base (productId, title, price, imageUrl)
+        public Movie(string title, decimal price, string director) : base(title, price)
         {
-            this.director = director;
+            Director = director;
         }
     }
 }

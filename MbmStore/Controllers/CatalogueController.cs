@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using MbmStore.Models;
 using MbmStore.ViewModels;
 using MbmStore.Infrastructure;
+using MbmStore.DAL;
 
 namespace MbmStore.Controllers
 {
     public class CatalogueController : Controller
     {
+        private MbmStoreContext db;
+
         public int PageSize = 2;
 
         // object
@@ -19,23 +23,31 @@ namespace MbmStore.Controllers
         // GET: Catalogue
         public ActionResult Index(string category, int page = 1)
         {
-            Repository repository = new Repository();
+            // Repository repository = new Repository();
 
-            ProductsListViewModel model = new ProductsListViewModel
+            // object that we use to connect to the db
+            db = new MbmStoreContext();
+
+            ProductsListViewModel model = new ProductsListViewModel()
             {
-                Products = repository.Products
+                Products = db.Products
                     .Where(p => category == null || p.Category == category)
                     .OrderBy(p => p.ProductId)
                     .Skip((page - 1) * PageSize)
-                    .Take(PageSize),
+                    .Take(PageSize)
+                    .ToList(),
 
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Products.Where(p => category == null || p.Category == category).Count()
+                    TotalItems = category == null ?
+                    db.Products.Count() :
+                    db.Products.Where(e => e.Category == category).Count()
                 },
-                CurrentCategory = category
+                CurrentCategory = category,
+
+                MusicCDs = db.MusicCDs.Include(m => m.Tracks).ToList()
             };
 
             List<SelectListItem> Quantity = new List<SelectListItem>();
