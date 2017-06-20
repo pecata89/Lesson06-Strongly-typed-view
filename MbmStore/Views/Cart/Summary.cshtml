@@ -4,6 +4,11 @@
     <tbody>
         <tr>
             <td class="align-middle" style="padding-right: 20px;">
+                <form class="align-middle" action="~/Admin/MusicCDs">
+                    <button type="submit" class="btn btn-outline-danger">ADMIN AREA</button>
+                </form>
+            </td>
+            <td class="align-middle" style="padding-right: 20px;">
                 <b>Your cart:</b>
                 @Model.Lines.Sum(x => x.Quantity) item(s),
                 @Model.TotalPrice.ToString("n")
